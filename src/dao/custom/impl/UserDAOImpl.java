@@ -1,30 +1,27 @@
 package dao.custom.impl;
 
-import dao.custom.BookDAO;
+import dao.custom.UserDAO;
 import db.DBConnection;
-import entity.Book;
-import entity.Branch;
+import entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDAOImpl implements BookDAO {
+public class UserDAOImpl implements UserDAO {
 
     private Connection getConnection() throws SQLException, ClassNotFoundException {
         return DBConnection.getInstance().getConnection();
     }
 
     @Override
-    public boolean save(Book entity) {
-        String sql = "INSERT INTO Book (title, author, availability_status, generation, branch_id) VALUES (?, ?, ?, ?, ?)";
+    public boolean save(User entity) {
+        String sql = "INSERT INTO User (user_name, user_email, user_password) VALUES (?, ?, ?)";
         try (Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, entity.getTitle());
-            statement.setString(2, entity.getAuthor());
-            statement.setInt(3, entity.getAvailabilityStatus());
-            statement.setString(4, entity.getGeneration());
-            statement.setLong(5, entity.getBranch().getId()); // Assuming branch ID is available
+            statement.setString(1, entity.getName());
+            statement.setString(2, entity.getEmail());
+            statement.setString(3, entity.getPassword());
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException | ClassNotFoundException e) {
@@ -34,41 +31,36 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<Book> getAll() {
-        String sql = "SELECT * FROM Book";
-        List<Book> books = new ArrayList<>();
+    public List<User> getAll() {
+        String sql = "SELECT * FROM User";
+        List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                Book book = new Book(
+                User user = new User(
                         resultSet.getLong("id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("author"),
-                        resultSet.getInt("availability_status"),
-                        resultSet.getString("generation"),
-                        // You'll need to handle the branch ID appropriately
-                        new Branch());
-                books.add(book);
+                        resultSet.getString("user_name"),
+                        resultSet.getString("user_email"),
+                        resultSet.getString("user_password"));
+                users.add(user);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return books;
+        return users;
     }
 
     @Override
-    public boolean update(Book entity) {
-        String sql = "UPDATE Book SET title = ?, author = ?, availability_status = ?, generation = ?, branch_id = ? WHERE id = ?";
+    public boolean update(User entity) {
+        String sql = "UPDATE User SET user_name = ?, user_email = ?, user_password = ? WHERE id = ?";
         try (Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, entity.getTitle());
-            statement.setString(2, entity.getAuthor());
-            statement.setInt(3, entity.getAvailabilityStatus());
-            statement.setString(4, entity.getGeneration());
-            statement.setLong(5, entity.getBranch().getId());
-            statement.setLong(6, entity.getId());
+            statement.setString(1, entity.getName());
+            statement.setString(2, entity.getEmail());
+            statement.setString(3, entity.getPassword());
+            statement.setLong(4, entity.getId());
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException | ClassNotFoundException e) {
@@ -79,7 +71,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public boolean delete(long id) {
-        String sql = "DELETE FROM Book WHERE id = ?";
+        String sql = "DELETE FROM User WHERE id = ?";
         try (Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);

@@ -1,39 +1,36 @@
 package dao;
 
-import dao.custom.impl.CategoryDaoImpl;
+import dao.custom.impl.BookDAOImpl;
+import dao.custom.impl.BorrowDAOImpl;
+import dao.custom.impl.BranchDAOImpl;
+import dao.custom.impl.UserDAOImpl;
 
-public class DaoFactory {
-    private static DaoFactory daoFactory;
+public class DAOFactory {
+    private static DAOFactory daoFactory;
 
-    private DaoFactory() {
-
+    private DAOFactory() {
     }
 
-    public static DaoFactory getInstance() {
-        if (daoFactory == null) {
-            daoFactory = new DaoFactory();
-        }
-        return daoFactory;
+    public static DAOFactory getDaoFactory() {
+        return daoFactory == null ? daoFactory = new DAOFactory() : daoFactory;
     }
 
-    public SuperDAO getDao(DaoTypes type) {
-        switch (type) {
-            case Category:
-                return new CategoryDaoImpl();
-            case Book:
-                return null;
-            case Member:
-                return null;
-            case Borrow:
-                return null;
-            case Return:
-                return null;
+    public enum DAOType {
+        BOOK, BRANCH, USER, BORROW
+    }
+
+    public SupperDAO getDAO(DAOType daoType) {
+        switch (daoType) {
+            case BOOK:
+                return new BookDAOImpl();
+            case USER:
+                return new UserDAOImpl();
+            case BRANCH:
+                return new BranchDAOImpl();
+            case BORROW:
+                return new BorrowDAOImpl();
             default:
                 return null;
         }
-    }
-
-    public enum DaoTypes {
-        Category, Book, Member, Borrow, Return;
     }
 }

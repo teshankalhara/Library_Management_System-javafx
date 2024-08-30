@@ -1,15 +1,13 @@
 package dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public interface CrudDao<T, ID> extends SuperDAO {
-    String save(T t) throws Exception;
+public interface CrudDAO<T> extends SupperDAO {
+    List<T> getAll();
 
-    String update(T t) throws Exception;
+    boolean save(T dto);
 
-    String delete(ID id) throws Exception;
+    boolean update(T dto);
 
-    T get(ID id) throws Exception;
-
-    ArrayList<T> getAll() throws Exception;
+    boolean delete(long id);
 }
