@@ -1,28 +1,45 @@
 package entity;
 
+import dto.BookDTO;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Book {
-    private int id;
+    private long id;
     private String title;
     private String author;
-    private Category category;
-    private int isAvailable;
+    private int availabilityStatus;
+    private String generation;
+    private Branch branch;
+    private List<Borrow> borrows = new ArrayList<>();
 
     public Book() {
+        // No-args constructor
     }
 
-    public Book(int id, String title, String author, Category category, int isAvailable) {
+    public Book(long id, String title, String author, int availabilityStatus, String generation, Branch branch) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.category = category;
-        this.isAvailable = isAvailable;
+        this.availabilityStatus = availabilityStatus;
+        this.generation = generation;
+        this.branch = branch;
     }
 
-    public int getId() {
+    public Book(String title, String author, int availabilityStatus, String generation, Branch branch) {
+        this.title = title;
+        this.author = author;
+        this.availabilityStatus = availabilityStatus;
+        this.generation = generation;
+        this.branch = branch;
+    }
+
+    // Getters and setters
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -42,25 +59,52 @@ public class Book {
         this.author = author;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getAvailabilityStatus() {
+        return availabilityStatus;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setAvailabilityStatus(int availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
     }
 
-    public int getIsAvailable() {
-        return isAvailable;
+    public String getGeneration() {
+        return generation;
     }
 
-    public void setIsAvailable(int isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setGeneration(String generation) {
+        this.generation = generation;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+    public List<Borrow> getBorrows() {
+        return borrows;
+    }
+
+    public void setBorrows(List<Borrow> borrows) {
+        this.borrows = borrows;
+    }
+
+    public BookDTO toDTO() {
+        return new BookDTO(id, title, author, availabilityStatus, generation, branch.toDTO());
     }
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", category=" + category
-                + ", isAvailable=" + isAvailable + "]";
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", availabilityStatus=" + availabilityStatus +
+                ", generation='" + generation + '\'' +
+                ", branch=" + branch +
+                ", borrows=" + borrows +
+                '}';
     }
 }
