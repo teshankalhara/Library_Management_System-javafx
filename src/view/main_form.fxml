@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="404.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFromController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#34495e" height="432.0" strokeType="INSIDE" strokeWidth="0.0" width="587.0" />
+      <ImageView fx:id="imgAdmin" fitHeight="139.0" fitWidth="107.0" layoutX="172.0" layoutY="163.0" onMouseClicked="#imgAdminOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assest/image/admin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgUser" fitHeight="107.0" fitWidth="110.0" layoutX="331.0" layoutY="163.0" onMouseClicked="#imgUserOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assest/image/user.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutY="62.0" prefHeight="16.0" prefWidth="587.0" text="Library Management System" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

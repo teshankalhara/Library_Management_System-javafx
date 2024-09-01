@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserBooksFromController">
+   <children>
+      <Pane layoutX="18.0" layoutY="18.0" prefHeight="42.0" prefWidth="931.0" style="-fx-background-color: DCF1F5;" />
+      <Pane layoutX="6.0" layoutY="9.0" prefHeight="544.0" prefWidth="180.0">
+         <children>
+            <TableView fx:id="tblBrrowed" layoutX="13.0" layoutY="51.0" prefHeight="480.0" prefWidth="150.0">
+              <columns>
+                <TableColumn fx:id="columnBookId" prefWidth="45.0" text="ID" />
+                <TableColumn fx:id="columnBookName" prefWidth="105.0" text="Name" />
+              </columns>
+            </TableView>
+            <Label layoutX="15.0" layoutY="22.0" text="Borrowed">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <TableView fx:id="tblBookList" layoutX="186.0" layoutY="60.0" prefHeight="221.0" prefWidth="762.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="57.0" text="ID" />
+          <TableColumn fx:id="columnTitle" prefWidth="124.0" text="Title" />
+            <TableColumn fx:id="columnAuthor" prefWidth="114.0" text="Author" />
+            <TableColumn fx:id="columnAStatus" prefWidth="135.0" text="Avalablity Status" />
+            <TableColumn fx:id="columnGen" prefWidth="143.0" text="Gen" />
+            <TableColumn fx:id="columnBranch" prefWidth="183.0" text="Branch" />
+        </columns>
+      </TableView>
+      <Pane layoutX="186.0" layoutY="294.0" prefHeight="259.0" prefWidth="762.0" style="-fx-background-color: DCF1F5;">
+         <children>
+            <TextField fx:id="textSearch" layoutX="189.0" layoutY="14.0" prefHeight="26.0" prefWidth="335.0" promptText="Search here..." />
+            <Button fx:id="btnSearch" layoutX="525.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: orange;" text="Search" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
+            <Label layoutX="32.0" layoutY="98.0" text="Book Title : ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" layoutY="148.0" text="Author Name : ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" layoutY="198.0" text="Gen :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblAvSt" layoutX="465.0" layoutY="148.0" text="Availabality Status :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="465.0" layoutY="98.0" text="Book Id :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="CombSearchValues" layoutX="93.0" layoutY="14.0" opacity="0.5" prefHeight="26.0" prefWidth="96.0" promptText="Type" />
+            <Label layoutX="156.0" layoutY="237.0" text="You need return borrowed books within 07 days after borrowing.">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblBookTitle" layoutX="154.0" layoutY="101.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblAthorName" layoutX="186.0" layoutY="151.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblGen" layoutX="91.0" layoutY="201.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblBookId" layoutX="559.0" layoutY="101.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblStatus" layoutX="677.0" layoutY="151.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="245.0" layoutY="58.0" text="Branch :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblBranch" layoutX="330.0" layoutY="61.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSearchError" layoutX="227.0" layoutY="40.0" textFill="RED" />
+         </children>
+      </Pane>
+      <Label layoutX="191.0" layoutY="35.0" text="Book List">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnReturn" layoutX="700.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnReturnOnAction" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #C70039;" text="Return" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBorrow" layoutX="521.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnBorrowOnAction" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #134E9E;" text="Borrow" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblDate" layoutX="832.0" layoutY="35.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
